@@ -1,0 +1,31 @@
+package com.thiago.crudspring;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+import com.thiago.crudspring.model.Course;
+import com.thiago.crudspring.repository.CourseRepository;
+
+@SpringBootApplication
+public class CrudSpringApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CrudSpringApplication.class, args);
+	}
+
+	@Bean
+	CommandLineRunner initDatabase(CourseRepository courseRepository) {
+		return args -> {
+			courseRepository.deleteAll();  //Sempre inicializar a base de dados limpa sem registros.
+
+			Course c = new Course();
+			c.setName("Angular com spring");
+			c.setCategory("front-end");
+
+
+			courseRepository.save(c);
+		};
+	}
+}
