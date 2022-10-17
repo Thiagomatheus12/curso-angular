@@ -5,6 +5,7 @@ import { catchError, Observable, of } from 'rxjs';
 
 import { Course } from '../model/course';
 import { CoursesService } from './../services/courses.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -21,7 +22,7 @@ export class CoursesComponent implements OnInit {
   /**
    * Variável que armazena quais os cursos que serão mostrado no browser.
    */
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   /**
    *Chamada do construtor.
@@ -29,7 +30,9 @@ export class CoursesComponent implements OnInit {
    */
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
     ) {
 
     this.courses$ = this.coursesService.list().
@@ -50,7 +53,11 @@ export class CoursesComponent implements OnInit {
       data: errorMsg
     });
   }
-  
+
+  onAdd() {
+    this.router.navigate(['new'], {relativeTo: this.route}); //para pegar a rota que eu já estou e adicionar o /new, ao invés de usar 'courses/new'.
+  }
+
   ngOnInit(): void {
 
 }
