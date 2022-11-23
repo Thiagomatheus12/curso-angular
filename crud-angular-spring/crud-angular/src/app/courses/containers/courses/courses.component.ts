@@ -1,10 +1,10 @@
-import { ErrorDialogComponent } from './../../shared/components/error-dialog/error-dialog.component';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, of } from 'rxjs';
 
-import { Course } from '../model/course';
-import { CoursesService } from './../services/courses.service';
+import { Course } from '../../model/course';
+import { CoursesService } from '../../services/courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -19,10 +19,6 @@ export class CoursesComponent implements OnInit {
  */
   courses$: Observable<Course[]>;
 
-  /**
-   * Variável que armazena quais os cursos que serão mostrado no browser.
-   */
-  displayedColumns = ['name', 'category', 'actions'];
 
   /**
    *Chamada do construtor.
